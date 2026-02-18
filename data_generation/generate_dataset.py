@@ -24,6 +24,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import random
 import sys
 import time
 import traceback
@@ -514,8 +515,6 @@ def run_test(persona_id: str, num_turns: int, output_dir: Optional[Path]) -> Non
 # =============================================================================
 
 if __name__ == "__main__":
-    import random
-
     parser = argparse.ArgumentParser(
         description="Generate synthetic SafeAssist training data (Tasks A + D)"
     )
