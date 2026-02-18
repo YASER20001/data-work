@@ -194,7 +194,10 @@ def run_pipeline_turn(
     """
     state = _build_app_state(messages, user_input, previous_state)
     try:
-        return graph.invoke(state)
+        result = graph.invoke(state)
+        if isinstance(result, dict):
+            result = AppState(**result)
+        return result
     except Exception as e:
         print(f"    [Pipeline Error] {type(e).__name__}: {e}")
         return None
