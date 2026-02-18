@@ -449,10 +449,73 @@ def generate_dataset(
 
 
 # =============================================================================
+# TEST MODE — single session, specific persona, custom turn count
+# =============================================================================
+
+def run_test(persona_id: str, num_turns: int, output_dir: Optional[Path]) -> None:
+    """
+    Generate exactly one session for a specific persona and print the result.
+    Intended for quick local testing without running the full 1000-session job.
+    """
+    if persona_id not in PERSONAS:
+        valid = ", ".join(sorted(PERSONAS.keys()))
+        print(f"[Error] Unknown persona '{persona_id}'. Valid IDs: {valid}")
+        sys.exit(1)
+
+    persona = PERSONAS[persona_id]
+    out_dir = output_dir or OUTPUT_DIR
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    # Pick a random emotional state and disclosure stage for variety
+    from data_generation.session_config import EMOTIONAL_STATES, DISCLOSURE_STAGES
+    emotional_state_key = random.choice(list(EMOTIONAL_STATES.keys()))
+    disclosure_stage_key = random.choice(list(DISCLOSURE_STAGES.keys()))
+
+    session_id = f"test_{persona_id}"
+    print(f"\n{'=' * 60}")
+    print(f"[TEST] Persona  : {persona['name_en']} ({persona_id})")
+    print(f"[TEST] Emotion  : {emotional_state_key}")
+    print(f"[TEST] Disclosure: {disclosure_stage_key}")
+    print(f"[TEST] Turns    : {num_turns}")
+    print(f"{'=' * 60}\n")
+
+    session = generate_session(
+        session_id=session_id,
+        persona=persona,
+        emotional_state_key=emotional_state_key,
+        disclosure_stage_key=disclosure_stage_key,
+        num_turns=num_turns,
+    )
+
+    # Pretty-print the session to stdout
+    print(f"\n{'=' * 60}")
+    print("[TEST OUTPUT]\n")
+    for turn in session["turns"]:
+        role = "USER     " if turn["role"] == "user" else "ASSISTANT"
+        print(f"[{role}] {turn['content']}")
+        if turn["role"] == "assistant" and turn.get("system_state"):
+            ss = turn["system_state"]
+            print(f"           ^ intent={ss.get('intent')} | risk={ss.get('risk_level')}")
+        print()
+
+    if session.get("final_case_notes"):
+        print("[CASE NOTES]")
+        print(json.dumps(session["final_case_notes"], ensure_ascii=False, indent=2))
+
+    # Optionally save to file
+    out_file = out_dir / f"{session_id}.json"
+    with open(out_file, "w", encoding="utf-8") as f:
+        json.dump(session, f, ensure_ascii=False, indent=2)
+    print(f"\n[Saved] {out_file}")
+
+
+# =============================================================================
 # CLI ENTRY POINT
 # =============================================================================
 
 if __name__ == "__main__":
+    import random
+
     parser = argparse.ArgumentParser(
         description="Generate synthetic SafeAssist training data (Tasks A + D)"
     )
@@ -476,11 +539,35 @@ if __name__ == "__main__":
         dest="output_dir",
         help="Override default output directory",
     )
+    # ------------------------------------------------------------------
+    # Test mode flags
+    # ------------------------------------------------------------------
+    parser.add_argument(
+        "--test",
+        action="store_true",
+        help="Run a single test session and print output (skips full dataset generation)",
+    )
+    parser.add_argument(
+        "--persona",
+        type=str,
+        default="p01",
+        help="Persona ID to use in test mode (default: p01). Options: p01–p10",
+    )
+    parser.add_argument(
+        "--turns",
+        type=int,
+        default=3,
+        help="Number of user turns in test mode (default: 3)",
+    )
     args = parser.parse_args()
 
     out = Path(args.output_dir) if args.output_dir else None
-    generate_dataset(
-        total_sessions=args.sessions,
-        start_from=args.start_from,
-        output_dir=out,
-    )
+
+    if args.test:
+        run_test(persona_id=args.persona, num_turns=args.turns, output_dir=out)
+    else:
+        generate_dataset(
+            total_sessions=args.sessions,
+            start_from=args.start_from,
+            output_dir=out,
+        )
