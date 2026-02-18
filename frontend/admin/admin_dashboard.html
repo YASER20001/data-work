@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>لوحة التحكم - المسؤول</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="../index.html" class="logo"><img src="../images/logo.png" alt=""> رفد - المسؤول</a>
+    <ul id="nav-links">
+      <li><a href="admin_dashboard.html">اللوحة</a></li>
+      <li><a href="admin_users.html">إدارة المستخدمين</a></li>
+      <li><a href="../login.html" onclick="localStorage.clear()">تسجيل الخروج</a></li>
+    </ul>
+  </nav>
+</header>
+
+
+<main>
+  <h1>لوحة تحكم المسؤول</h1>
+
+  <section class="home-section">
+    <h2>إحصائيات النظام</h2>
+    <p>عدد المستخدمين: <span id="stat-users">--</span></p>
+    <p>عدد الجلسات: <span id="stat-sessions">--</span></p>
+    <p>تقارير منشأة: <span id="stat-reports">--</span></p>
+  </section>
+
+  <section class="home-section">
+    <h2>إجراءات سريعة</h2>
+    <button class="cta-button">إعادة بناء الـ RAG</button>
+    <button class="cta-button">مسح الجلسات القديمة</button>
+  </section>
+</main>
+
+<footer><p>&copy; 2025 رفد</p></footer>
+<script src="../roles.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>رفد</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo"><img src="images/logo.png" alt="شعار رفد"> رفد</a>
+            <ul id="nav-links">
+                <li><a href="index.html">الرئيسية</a></li>
+                <li><a href="chat.html">المحادثة</a></li>
+                <li><a href="about.html">من نحن</a></li>
+                <li id="login-link"><a href="login.html">تسجيل الدخول</a></li>
+            </ul>
+            <button class="quick-exit">خروج سريع</button>
+        </nav>
+    </header>
+    <main>
+        <div class="main-content" style="text-align: right;">
+            <h1>سياسة الخصوصية</h1>
+            <h2>1. سرية البيانات</h2>
+            <p>نحن لا نجمع أي معلومات شخصية يمكن أن تحدد هويتك. المحادثات مع نظام الذكاء الاصطناعي تكون مجهولة الهوية تماماً لضمان خصوصيتك.</p>
+            <h2>2. تشفير المحادثات</h2>
+            <p>جميع المحادثات تكون مشفرة بالكامل ولا يمكن لأي طرف ثالث، بما في ذلك فريقنا، الاطلاع عليها.</p>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2025 رفد. جميع الحقوق محفوظة. | <a href="privacy.html">سياسة الخصوصية</a></p>
+    </footer>
+    <script src="auth.js"></script>
+    <script>document.querySelector('.quick-exit').addEventListener('click', () => window.location.replace('https://www.google.com'));</script>
+</body>
+</html>

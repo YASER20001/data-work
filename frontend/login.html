@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>رفد</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="login-page-body">
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                <img src="images/logo.png" alt="شعار رفد">
+                رفد
+            </a>
+            <ul id="nav-links">
+                <li><a href="index.html">الرئيسية</a></li>
+                <li><a href="chat.html">المحادثة</a></li>
+                <li><a href="about.html">من نحن</a></li>
+                <li id="login-link" class="hidden"><a href="login.html">تسجيل الدخول</a></li>
+            </ul>
+            <button class="quick-exit">خروج سريع</button>
+        </nav>
+    </header>
+
+    <main>
+        <div class="form-container">
+            <form id="auth-form">
+                <h2 id="form-title">تسجيل الدخول</h2>
+                <label for="email">البريد الإلكتروني</label>
+                <input type="email" id="email" required>
+                <label for="password">كلمة المرور</label>
+                <input type="password" id="password" required>
+                <div id="confirm-password-field" class="hidden">
+                    <label for="confirm-password">تأكيد كلمة المرور</label>
+                    <input type="password" id="confirm-password">
+                </div>
+
+                
+                <a href="#" id="forgot-password-link" class="forgot-password-link">نسيت كلمة السر؟</a>
+
+                <div id="error-message" class="error-message hidden"></div> 
+
+                <button type="submit" id="submit-button">دخول</button>
+            </form>
+            <div class="form-links">
+                <a href="#" id="toggle-link">ليس لديك حساب؟ سجل الآن</a>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <p>&copy; 2025 رفد. جميع الحقوق محفوظة. | <a href="privacy.html">سياسة الخصوصية</a></p>
+    </footer>
+
+    <script src="roles.js"></script>
+    <script src="auth.js"></script>
+    <script>
+        document.querySelector('.quick-exit').addEventListener('click', () => window.location.replace('https://www.google.com'));
+
+        const formTitle = document.getElementById('form-title');
+        const submitButton = document.getElementById('submit-button');
+        const toggleLink = document.getElementById('toggle-link');
+        const confirmPasswordField = document.getElementById('confirm-password-field');
+        const confirmPasswordInput = document.getElementById('confirm-password'); // Get confirm password input
+        const forgotPasswordLink = document.getElementById('forgot-password-link');
+        const authForm = document.getElementById('auth-form');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const errorMessageDiv = document.getElementById('error-message'); 
+
+        let isLoginView = true;
+
+        function hideError() {
+            errorMessageDiv.innerText = '';
+            errorMessageDiv.classList.add('hidden');
+        }
+
+        toggleLink.addEventListener('click', function(event) {
+            event.preventDefault();
+            isLoginView = !isLoginView;
+            hideError(); 
+            
+            // Clear password fields on toggle
+            passwordInput.value = '';
+            confirmPasswordInput.value = '';
+
+            formTitle.innerText = isLoginView ? 'تسجيل الدخول' : 'إنشاء حساب جديد';
+            submitButton.innerText = isLoginView ? 'دخول' : 'إنشاء حساب';
+            toggleLink.innerText = isLoginView ? 'ليس لديك حساب؟ سجل الآن' : 'لديك حساب بالفعل؟ سجل الدخول';
+            confirmPasswordField.classList.toggle('hidden');
+            forgotPasswordLink.classList.toggle('hidden', !isLoginView);
+        });
+
+        authForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            hideError(); 
+
+            const email = emailInput.value.trim();
+            const password = passwordInput.value.trim();
+
+            if (!email || !password) {
+                errorMessageDiv.innerText = 'يرجى إدخال البريد الإلكتروني وكلمة المرور.';
+                errorMessageDiv.classList.remove('hidden');
+                return;
+            }
+
+            if (isLoginView) {
+                // Real login via backend
+                apiPost("/api/login", { email, password })
+                .then((data) => {
+                    localStorage.setItem('isLoggedIn', 'true');
+                    localStorage.setItem('rifd_user_id', data.user_id);
+                    localStorage.setItem('rifd_role', data.role);
+
+                    if (data.role === 'admin') {
+                        window.location.href = 'admin/admin_dashboard.html';
+                    } else if (data.role === 'therapist') {
+                        window.location.href = 'therapist/therapist_dashboard.html';
+                    } else {
+                        window.location.href = 'chat.html';
+                    }
+                })
+                .catch((err) => {
+                    console.error(err);
+                    errorMessageDiv.innerText = 'خطأ في البريد الإلكتروني أو كلمة المرور.';
+                    errorMessageDiv.classList.remove('hidden');
+                });
+            } else {
+                // Registration placeholder – keep as simple toast for now
+                alert('تم إنشاء الحساب بنجاح! يمكنك الآن تسجيل الدخول.');
+                // Optionally flip back to login mode:
+                isLoginView = true;
+                formTitle.innerText = 'تسجيل الدخول';
+                submitButton.innerText = 'دخول';
+                toggleLink.innerText = 'ليس لديك حساب؟ سجل الآن';
+                confirmPasswordField.classList.add('hidden');
+                forgotPasswordLink.classList.remove('hidden');
+            }
+        });
+
+    </script>
+</body>
+</html>

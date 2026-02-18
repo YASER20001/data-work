@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>رفد</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="chat-page-body">
+  <header>
+    <nav>
+      <a href="index.html" class="logo">
+        <img src="images/logo.png" alt="شعار رفد"> رفد
+      </a>
+      <ul id="nav-links">
+        <li><a href="index.html">الرئيسية</a></li>
+        <li><a href="about.html">من نحن</a></li>
+        <li id="login-link"><a href="login.html">تسجيل الدخول</a></li>
+      </ul>
+      <button class="quick-exit">خروج سريع</button>
+    </nav>
+  </header>
+
+  <main>
+    <div class="chat-header"><h2>رفيدة</h2></div>
+    <div class="chat-container">
+      <div class="chat-box">
+        <div class="message received">مرحباً بكِ في رفد، كيف يمكنني مساعدتك اليوم؟ أنا هنا للاستماع بسرية تامة.</div>
+      </div>
+      <div class="chat-input">
+        <button class="icon-button" title="إرفاق صورة" aria-label="إرفاق صورة">
+          <!-- icon svg -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M14.828 7.757l-5.656 5.657a1 1 0 1 0 1.414 1.414l5.657-5.656A3 3 0 0 0 12 4H6a5 5 0 0 0 5 5v2a1 1 0 0 0 2 0v-2h-.172a3 3 0 0 0-2.121.879l-2.829 2.828a1 1 0 0 1-1.414 0l-1.414-1.414a1 1 0 0 1 0-1.414l5.657-5.657a5 5 0 0 1 7.07 0l4.95 4.95a1 1 0 0 1 0 1.414l-1.414 1.414a1 1 0 0 1-1.414 0l-4.95-4.95a3 3 0 0 0-4.242 0z"/></svg>
+        </button>
+        <button class="icon-button" title="تسجيل مقطع صوتي" aria-label="تسجيل مقطع صوتي">
+          <!-- icon svg -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 1a5 5 0 0 1 5 5v6a5 5 0 0 1-10 0V6a5 5 0 0 1 5-5zm0-2a7 7 0 0 0-7 7v6a7 7 0 0 0 14 0V6a7 7 0 0 0-7-7zM3 12a1 1 0 0 1 1 1v2.061A8.996 8.996 0 0 0 12 22a8.996 8.996 0 0 0 8-6.939V13a1 1 0 1 1 2 0v2.061A10.992 10.992 0 0 1 13 23.938V28h-2v-4.062A10.992 10.992 0 0 1 1 15.061V13a1 1 0 0 1 1-1z"/></svg>
+        </button>
+        <textarea placeholder="اكتبي رسالتك هنا..." rows="1" dir="auto"></textarea>
+        <button class="send-button">إرسال</button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 رفد. جميع الحقوق محفوظة. | <a href="privacy.html">سياسة الخصوصية</a></p>
+  </footer>
+
+  <script src="auth.js"></script>
+  <script>
+    // Replace with your deployed backend URL (Render/Railway/Fly)
+    const API_BASE =
+      localStorage.getItem("RIFD_API") || "https://rifd-api.onrender.com" ||
+      "http://127.0.0.1:8000";
+  </script>
+
+  <script>
+        // Quick Exit clears session and leaves page
+        document.querySelector('.quick-exit').addEventListener('click', () => {
+            localStorage.removeItem('rifd_session_id');
+            window.location.replace('https://www.google.com');
+        });
+
+        const chatBox  = document.querySelector('.chat-box');
+        const textarea = document.querySelector('.chat-input textarea');
+        const sendBtn  = document.querySelector('.send-button');
+
+        let sessionId = localStorage.getItem('rifd_session_id') || null;
+        
+        // ensure a stable user id across sessions
+        function ensureUserId() {
+          let uid = localStorage.getItem('rifd_user_id');
+          if (!uid) {
+            // use login user id if you have it; fallback: anonymous UUID
+            uid = (crypto.randomUUID && crypto.randomUUID()) || ('anon-' + Math.random().toString(36).slice(2));
+            localStorage.setItem('rifd_user_id', uid);
+          }
+          return uid;
+        }
+        let userId = ensureUserId();
+
+        function autoGrow(el){ el.style.height='auto'; el.style.height = el.scrollHeight + 'px'; }
+        function addBubble(text, role){
+            const div = document.createElement('div');
+            div.className = `message ${role === 'assistant' ? 'received' : 'sent'}`;
+            div.innerText = text;
+            chatBox.appendChild(div);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        async function sendToBot(text){
+            addBubble(text, 'user');
+            textarea.value = ''; autoGrow(textarea);
+
+            const typing = document.createElement('div');
+            typing.className = 'message received'; typing.innerText = '…';
+            chatBox.appendChild(typing); chatBox.scrollTop = chatBox.scrollHeight;
+
+            sendBtn.disabled = true;
+
+            try {
+            const res = await fetch(`${API_BASE}/api/chat`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ session_id: sessionId, user_id: userId, message: text })
+            });
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            const data = await res.json();
+
+            sessionId = data.session_id;
+            localStorage.setItem('rifd_session_id', sessionId);
+
+            typing.remove();
+            addBubble(data.reply || '…', 'assistant');
+            } catch (e) {
+              typing.remove();
+              // Try to recover status/body for better debugging
+              let status = "";
+              let body = "";
+              try {
+                // Re-run the request just to read the body when it failed
+                const res = await fetch(`${API_BASE}/api/chat`, {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ session_id: sessionId, message: text })
+                });
+                if (!res.ok) {
+                  status = `HTTP ${res.status}`;
+                  body = (await res.text()).slice(0, 300);
+                  throw new Error(`${status}: ${body}`);
+                }
+              } catch (inner) {
+                const msg = String(inner || e);
+                addBubble("تعذّر إرسال الرسالة: " + msg, 'assistant');
+                console.error("Chat POST failed:", inner || e);
+              }
+            } finally {
+              sendBtn.disabled = false;
+            }
+        }
+
+        sendBtn.addEventListener('click', () => {
+            const t = textarea.value.trim();
+            if (t) sendToBot(t);
+        });
+        textarea.addEventListener('input', function(){ autoGrow(this); });
+        textarea.addEventListener('keypress', e => {
+            if (e.key === 'Enter' && !e.shiftKey){
+            e.preventDefault();
+            const t = textarea.value.trim();
+            if (t) sendToBot(t);
+            }
+        });
+    </script>
+    <script>
+        // === Microphone recording (Linear16 PCM, mono, 44.1kHz) ===
+        const micBtn = document.querySelectorAll('.icon-button[aria-label="تسجيل مقطع صوتي"]')[0];
+
+        let mediaStream, audioCtx, processor, source;
+        let recording = false;
+        let pcmChunks = [];  // Int16Array chunks
+
+        async function startRecording() {
+            // 1) get microphone
+            mediaStream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true } });
+            // 2) WebAudio graph
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: 44100 });
+            source = audioCtx.createMediaStreamSource(mediaStream);
+
+            // 3) AudioWorklet preferred; fallback to ScriptProcessor
+            if (audioCtx.audioWorklet) {
+            const workletCode = `
+                class PCMWorklet extends AudioWorkletProcessor {
+                process(inputs) {
+                    const input = inputs[0];
+                    if (!input || !input[0]) return true;
+                    const ch0 = input[0]; // Float32Array
+                    const pcm = new Int16Array(ch0.length);
+                    for (let i = 0; i < ch0.length; i++) {
+                    let s = Math.max(-1, Math.min(1, ch0[i]));
+                    pcm[i] = s < 0 ? s * 0x8000 : s * 0x7FFF;
+                    }
+                    this.port.postMessage(pcm.buffer, [pcm.buffer]);
+                    return true;
+                }
+                }
+                registerProcessor('pcm-worklet', PCMWorklet);
+            `;
+            const blob = new Blob([workletCode], { type: 'application/javascript' });
+            const url = URL.createObjectURL(blob);
+            await audioCtx.audioWorklet.addModule(url);
+            processor = new AudioWorkletNode(audioCtx, 'pcm-worklet');
+            processor.port.onmessage = (e) => pcmChunks.push(new Int16Array(e.data));
+            source.connect(processor).connect(audioCtx.destination);
+            } else {
+            // Fallback (deprecated, but works locally)
+            const bufferSize = 4096;
+            processor = audioCtx.createScriptProcessor(bufferSize, 1, 1);
+            processor.onaudioprocess = (ev) => {
+                const ch0 = ev.inputBuffer.getChannelData(0);
+                const pcm = new Int16Array(ch0.length);
+                for (let i = 0; i < ch0.length; i++) {
+                let s = Math.max(-1, Math.min(1, ch0[i]));
+                pcm[i] = s < 0 ? s * 0x8000 : s * 0x7FFF;
+                }
+                pcmChunks.push(pcm);
+            };
+            source.connect(processor);
+            processor.connect(audioCtx.destination);
+            }
+
+            recording = true;
+            micBtn.classList.add('recording'); // (optional) style hint
+        }
+
+        async function stopRecordingAndSend() {
+            recording = false;
+            try {
+            source && source.disconnect();
+            processor && processor.disconnect();
+            mediaStream && mediaStream.getTracks().forEach(t => t.stop());
+            audioCtx && audioCtx.close();
+            } catch {}
+
+            // Flatten chunks → one ArrayBuffer
+            let total = 0;
+            for (const c of pcmChunks) total += c.length;
+            const merged = new Int16Array(total);
+            let o = 0;
+            for (const c of pcmChunks) { merged.set(c, o); o += c.length; }
+            pcmChunks = [];
+
+            // Send to backend as raw LINEAR16 PCM
+            const sr = 44100;
+            const sessionId = localStorage.getItem('rifd_session_id') || '';
+            addBubble("🎙️ جارِ نسخ الصوت...", 'assistant');
+
+            try {
+            const res = await fetch(`${API_BASE}/api/audio?sr=${sr}&session_id=${encodeURIComponent(sessionId)}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/octet-stream' },
+                body: merged.buffer
+            });
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            const data = await res.json();
+
+            // persist session id
+            if (data.session_id) {
+                localStorage.setItem('rifd_session_id', data.session_id);
+            }
+
+            // show assistant reply
+            addBubble(data.reply || '…', 'assistant');
+            } catch (e) {
+            addBubble("الخادم غير متصل. جرّبي بعد لحظات.", 'assistant');
+            } finally {
+            micBtn.classList.remove('recording');
+            }
+        }
+
+        micBtn.addEventListener('click', async () => {
+            if (!recording) {
+            try { await startRecording(); }
+            catch (e) { addBubble("تعذر الوصول إلى الميكروفون. تحققي من الأذونات.", 'assistant'); }
+            } else {
+            await stopRecordingAndSend();
+            }
+        });
+    </script>
+    <script>
+      async function startRecording() {
+        try {
+          const stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true } });
+          // ... continue as you have it
+        } catch (err) {
+          console.error('getUserMedia failed:', err.name, err.message);
+          const map = {
+            NotAllowedError: "تم رفض الإذن. اسمحِ للصفحة باستخدام الميكروفون.",
+            NotFoundError: "لا يوجد ميكروفون متصل.",
+            NotReadableError: "الميكروفون مشغول في تطبيق آخر.",
+            SecurityError: "افتح الصفحة عبر localhost/HTTPS (وليس ملفًا مباشرًا).",
+            OverconstrainedError: "قيود الصوت لا تنطبق على جهازك."
+          };
+          addBubble(map[err.name] || "حدث خطأ بالميكروفون. تحققي من الأذونات والإعدادات.", 'assistant');
+          throw err;
+        }
+      }
+    </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>لوحة التحكم - المعالجة</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="../index.html" class="logo"><img src="../images/logo.png" alt=""> رفد - معالجة</a>
+    <ul id="nav-links">
+      <li><a href="therapist_dashboard.html">اللوحة</a></li>
+      <li><a href="therapist_reports.html">التقارير</a></li>
+      <li><a href="therapist_notifications.html">الإشعارات</a></li>
+      <li><a href="login.html" onclick="localStorage.clear()">تسجيل الخروج</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <h1>لوحة تحكم المعالجة</h1>
+
+  <section class="home-section">
+    <h2>مواعيدي القادمة</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>المستخدمة</th>
+          <th>الوقت</th>
+          <th>الحالة</th>
+        </tr>
+      </thead>
+      <tbody id="schedule">
+        <!-- Filled dynamically -->
+      </tbody>
+    </table>
+  </section>
+
+  <section class="home-section">
+    <h2>إحصائيات سريعة</h2>
+    <p>عدد الجلسات هذا الأسبوع: <span>--</span></p>
+    <p>عدد التقارير الجديدة: <span>--</span></p>
+  </section>
+</main>
+
+<footer><p>&copy; 2025 رفد</p></footer>
+<script src="../roles.js"></script>
+<script src="therapist.js"></script>
+</body>
+</html>
