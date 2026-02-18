@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: rifd-api
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn web_server:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false   # set in Render dashboard
+      - key: GEMINI_MODEL
+        value: gemini-2.0-flash
+      - key: VOICE_MODE
+        value: "false"
