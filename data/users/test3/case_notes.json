@@ -1,0 +1,18 @@
+{
+  "physical_abuse": [],
+  "verbal_abuse": [],
+  "threat": [],
+  "control": [],
+  "fear": [],
+  "emotion": [],
+  "risk": [],
+  "context": [],
+  "patterns": [],
+  "timeline": [],
+  "sentiment": [
+    "calm:0"
+  ],
+  "risk_fusion": [
+    "unknown:fallback"
+  ]
+}

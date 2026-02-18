@@ -1,0 +1,28 @@
+{
+  "test1": {
+    "user_id": "5e53e0f4-ac56-4051-ac73-c6990ac62afa",
+    "password_hash": "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4"
+  },
+  "test2": {
+    "user_id": "c31e8e57-07bc-4f6a-87b1-fa63f6215fb0",
+    "password_hash": "cbfad02f9ed2a8d1e08d8f74f5303e9eb93637d47f82ab6f1c15871cf8dd0481"
+  },
+  "test3": {
+    "username": "test3",
+    "password_hash": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3"
+  },
+  "test": {
+    "username": "test",
+    "password_hash": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3"
+  },
+  "asa": {
+    "username": "asa",
+    "email": "ammarbashmil@gmail.com",
+    "password_hash": "514f86ca9366bfea4f6028a36eb2b416ac4646896d57d459317b23e40812c0f3"
+  },
+  "ammartest1": {
+    "username": "ammartest1",
+    "email": "gc_3@yahoo.com",
+    "password_hash": "6536c9ba0d239d78b3b42b486025f24be3289bf3b7a00c58281f7b4768fa7b32"
+  }
+}
