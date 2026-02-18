@@ -1,0 +1,207 @@
+{
+  "meta": {
+    "agent_role": "Personality Classifier",
+    "sources": [
+      "Gottman Institute",
+      "DSM-5-TR",
+      "Vaillant's Defense Mechanisms"
+    ],
+    "languages": ["en", "ar"]
+  },
+  "profiles": [
+    {
+      "id": "STYLE_DEFENSIVE",
+      "name": "Defensive (High Conflict) / دفاعي",
+      "source": "Gottman Institute",
+      "definition": "User feels attacked and responds with righteous indignation or innocent victimhood.",
+      "criteria": [
+        "Cross-complaining (meeting a complaint with a counter-complaint).",
+        "Yes-butting (agreeing but immediately invalidating).",
+        "Whining or playing the victim.",
+        "Refusal to accept responsibility."
+      ],
+      "keywords": [
+        "not my fault", "why me", "you always", "unfair", "didn't do it",
+        "مو غلطتي", "ليش تلومني", "انت دايما", "ظلم", "ما سويت شي", "مو ذنبي"
+      ],
+      "recommended_tone": "Non-confrontational, Validating."
+    },
+    {
+      "id": "STYLE_STONEWALLING",
+      "name": "Stonewalling (Distant/Avoidant) / تجنبي",
+      "source": "Gottman Institute",
+      "definition": "User withdraws from the interaction to avoid conflict or emotional flooding.",
+      "criteria": [
+        "Monosyllabic answers (one-word responses).",
+        "Evasive maneuvers like tuning out.",
+        "Refusal to engage with emotional content."
+      ],
+      "keywords": [
+        "...", "idk", "fine", "whatever", "maybe", "I guess",
+        "مدري", "طيب", "براحتك", "عادي", "ما عندي كلام", "..."
+      ],
+      "recommended_tone": "Low-pressure, Patient."
+    },
+    {
+      "id": "STYLE_CONTEMPT",
+      "name": "Contempt (Hostile/Superior) / عدائي",
+      "source": "Gottman Institute",
+      "definition": "User treats the agent with disrespect, sarcasm, or ridicule.",
+      "criteria": [
+        "Sarcasm or mockery.",
+        "Name-calling or insults.",
+        "Assuming a position of moral superiority."
+      ],
+      "keywords": [
+        "stupid", "pathetic", "kidding me", "useless", "joke",
+        "غبي", "تستهبل", "سخيف", "ما منك فايدة", "مسخرة", "انت آلة غبية"
+      ],
+      "recommended_tone": "Firm boundaries, Professional."
+    },
+    {
+      "id": "STYLE_DISTRESSED",
+      "name": "Distressed (Panic) / فزع",
+      "source": "DSM-5-TR (Acute Stress Criteria)",
+      "definition": "User exhibits intense fear, helplessness, or cognitive tunneling.",
+      "criteria": [
+        "Expression of helplessness or loss of control.",
+        "Catastrophizing (focusing on worst outcomes).",
+        "Urgency and pleading language."
+      ],
+      "keywords": [
+        "help", "scared", "can't breathe", "panic", "please", "terrified",
+        "ساعدني", "خايف", "مرعوب", "مو قادر اتنفس", "الحقوني", "بموت من الخوف"
+      ],
+      "recommended_tone": "Grounding, Calming, Simple short sentences."
+    },
+    {
+      "id": "STYLE_COOPERATIVE",
+      "name": "Cooperative (Task-Oriented) / متعاون",
+      "source": "Clinical Therapeutic Alliance",
+      "definition": "User is engaged, willing to inspect their thoughts, and seeks constructive solutions.",
+      "criteria": [
+        "Active listening and validation.",
+        "Willingness to look inward (Introspection).",
+        "Asking clarifying questions."
+      ],
+      "keywords": [
+        "I see", "makes sense", "understand", "how do I", "thanks",
+        "فهمت", "صح كلامك", "كيف اسويها", "شكرا", "معقول", "اتفق معك"
+      ],
+      "recommended_tone": "Collaborative, Encouraging."
+    },
+    {
+      "id": "STYLE_ANGER",
+      "name": "Anger / Agitated (غاضب)",
+      "source": "DSM-5-TR (Irritability/Mood Criteria)",
+      "definition": "User is upset, frustrated, or high-intensity but NOT attacking the agent personally (unlike Contempt).",
+      "criteria": [
+        "Raised intensity or strong emotion.",
+        "Short temper / frustration.",
+        "Focus on the situation, not attacking the person."
+      ],
+      "keywords": [
+        "angry", "mad", "furious", "hate this", "annoying", "frustrated",
+        "معصب", "غاضب", "طفشت", "يزعج", "متنرفز", "زعلان"
+      ],
+      "recommended_tone": "Calm, De-escalating, Listening."
+    },
+    {
+      "id": "STYLE_DEPRESSED",
+      "name": "Depressed / Low Mood (مكتئب)",
+      "source": "DSM-5-TR (Depressive Episode Criteria)",
+      "definition": "User exhibits flat affect, hopelessness, disengagement, or low motivation.",
+      "criteria": [
+        "Flat affect or low energy.",
+        "Expressions of hopelessness.",
+        "Disengagement ('I don't care')."
+      ],
+      "keywords": [
+        "sad", "nothing matters", "tired", "don't care", "pointless", "exhausted",
+        "حزين", "مكتئب", "ما يفرق", "تعبان", "ماله داعي", "يائس", "مالي خلق"
+      ],
+      "recommended_tone": "Gentle, Warm, Validating, Slow-paced."
+    },
+    {
+      "id": "STYLE_DEFLECTION_HUMOR",
+      "name": "Avoidant Humor / Deflection (تهرب بالمزاح)",
+      "source": "Vaillant's Defense Mechanisms",
+      "definition": "User jokes, deflects, or uses sarcasm to escape discomfort or derail serious topics.",
+      "criteria": [
+        "Joking at inappropriate times.",
+        "Using sarcasm to avoid emotion.",
+        "Derailing the topic."
+      ],
+      "keywords": [
+        "lol", "haha", "jk", "just kidding", "weird", "silly", "whatever",
+        "هههه", "امزح", "ضحك", "استهبال", "يا عمي", "طقطقة"
+      ],
+      "recommended_tone": "Patient, Gently redirecting back to topic."
+    },
+    {
+      "id": "STYLE_NEUTRAL",
+      "name": "Neutral / Factual (محايد)",
+      "source": "Standard Sentiment Baseline",
+      "definition": "User is calm, factual, and strictly informative. No strong emotion detected.",
+      "criteria": [
+        "Stating facts only.",
+        "Giving instructions without emotion.",
+        "Stable and informational."
+      ],
+      "keywords": [
+        "ok", "yes", "no", "sure", "fine", "correct", "I see",
+        "طيب", "نعم", "لا", "تمام", "أوكي", "صحيح", "واضح"
+      ],
+      "recommended_tone": "Professional, Efficient, Direct."
+    },
+    {
+      "id": "STYLE_EUPHORIC",
+      "name": "Euphoric / Manic-Leaning (مبتهج جداً)",
+      "source": "DSM-5-TR (Manic Episode Criteria)",
+      "definition": "User shows high energy, pressured speech, grand plans, or excessive excitement.",
+      "criteria": [
+        "High energy or pressured speech.",
+        "Big plans or grandiosity.",
+        "Excessive excitement not matching context."
+      ],
+      "keywords": [
+        "amazing", "incredible", "huge plan", "never better", "perfect", "so much energy",
+        "رهيب", "خرافي", "عندي خطة", "طاقة", "مبسوط مرة", "فرحان", "كل شي تمام"
+      ],
+      "recommended_tone": "Grounded, Structured, Focus on one thing at a time."
+    },
+    {
+      "id": "STYLE_DISSOCIATIVE",
+      "name": "Trauma-Triggered / Dissociative (تشتت)",
+      "source": "DSM-5-TR (Dissociative Criteria)",
+      "definition": "User seems foggy, fragmented, goes quiet, or describes feeling 'unreal' due to trauma cues.",
+      "criteria": [
+        "Going quiet or foggy.",
+        "Fragmented sentences.",
+        "Feeling unreal or numb."
+      ],
+      "keywords": [
+        "foggy", "can't remember", "blank", "floated away", "not real", "numb",
+        "ضايع", "مشوش", "مو متذكر", "ما احس بشي", "فراغ", "مو واقعي"
+      ],
+      "recommended_tone": "Grounding (5-4-3-2-1), Very simple safety questions."
+    },
+
+    {
+      "id": "STYLE_UNCERTAIN",
+      "name": "Uncertain / Ambiguous (غير واضح)",
+      "source": "System Logic",
+      "definition": "User input is too short, vague, or contradictory to classify.",
+      "criteria": [
+        "One or two word answers (e.g., 'maybe', 'idk').",
+        "Conflicting emotional signals.",
+        "Lack of context."
+      ],
+      "keywords": [
+        "maybe", "not sure", "idk", "guess so", "hard to say",
+        "يمكن", "مو متأكد", "مدري", "ممكن", "صعب اقول"
+      ],
+      "recommended_tone": "Curious, Clarifying, Open-ended."
+    }
+  ]
+}

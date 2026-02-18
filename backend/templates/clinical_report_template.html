@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Clinical Case Report</title>
+
+<style>
+    /* ================================
+       FONT & BASE SETUP
+    =================================*/
+    body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        margin: 40px;
+        line-height: 1.6;
+        color: #1d1d1d;
+        background: #ffffff;
+    }
+
+    h1, h2, h3 {
+        font-family: "Segoe UI Semibold", Arial, sans-serif;
+        color: #003366;
+        margin-bottom: 8px;
+    }
+
+    /* ================================
+       HEADER
+    =================================*/
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 3px solid #003366;
+        padding-bottom: 10px;
+        margin-bottom: 25px;
+    }
+
+    .header-left {
+        display: flex;
+        align-items: center;
+    }
+
+    /* Replaced placeholder style with image style */
+    .logo-img {
+        height: 65px; /* Adjust height as needed */
+        width: auto;  /* Maintains aspect ratio */
+        margin-right: 15px;
+        display: block;
+    }
+
+    .header-title {
+        font-size: 26px;
+        font-weight: 700;
+        color: #003366;
+        letter-spacing: 0.5px;
+    }
+
+    .metadata {
+        font-size: 12px;
+        line-height: 1.3;
+        color: #444;
+        text-align: right;
+    }
+
+    /* ================================
+       FOOTER
+    =================================*/
+    .footer {
+        margin-top: 40px;
+        padding-top: 10px;
+        border-top: 1px solid #cccccc;
+        font-size: 11px;
+        color: #666;
+        text-align: center;
+    }
+
+    /* ================================
+       SECTIONS & BOXES
+    =================================*/
+    .section {
+        margin-bottom: 30px;
+    }
+
+    .section h2 {
+        border-bottom: 1px solid #d3d3d3;
+        padding-bottom: 5px;
+        margin-bottom: 12px;
+    }
+
+    .box {
+        background: #f7f9fc;
+        border-left: 4px solid #003366;
+        padding: 12px 15px;
+        white-space: pre-wrap;
+        font-size: 14px;
+        color: #2a2a2a;
+    }
+
+    /* ================================
+       METADATA PANEL
+    =================================*/
+    .meta-panel {
+        background: #eef3f9;
+        padding: 12px 15px;
+        border: 1px solid #c7d3e2;
+        border-radius: 6px;
+        margin-bottom: 30px;
+        font-size: 13px;
+    }
+
+    .meta-panel span {
+        font-weight: bold;
+        color: #003366;
+    }
+
+    /* ================================
+       TABLE STYLE (Medical Professional)
+    =================================*/
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 10px 0;
+        font-size: 13px;
+    }
+
+    table thead {
+        background: #003366;
+        color: white;
+    }
+
+    table th, table td {
+        padding: 8px 10px;
+        border: 1px solid #d0d9e4;
+    }
+
+    table tbody tr:nth-child(even) {
+        background: #f1f5fa;
+    }
+</style>
+</head>
+<body>
+
+<!-- ===========================
+     HEADER
+=========================== -->
+<div class="header">
+    <div class="header-left">
+        <img src="{{logo_source}}" alt="RIFD Logo" class="logo-img">
+        <div class="header-title">Clinical Case Report</div>
+    </div>
+
+    <div class="metadata">
+        <div><strong>Date:</strong> {{report_date}}</div>
+        <div><strong>Case ID:</strong> {{case_id}}</div>
+        <div><strong>Report Version:</strong> SAFEASSIST v1.0</div>
+    </div>
+</div>
+
+<!-- ===========================
+     METADATA PANEL
+=========================== -->
+<div class="meta-panel">
+    <span>System Personality:</span> {{system_personality}} &nbsp;&nbsp; |
+    <span>Risk Level:</span> {{system_risk_level}} &nbsp;&nbsp; |
+    <span>Language:</span> English (forced)
+</div>
+
+<!-- ===========================
+     EXECUTIVE SUMMARY
+=========================== -->
+<div class="section">
+    <h2>Executive Clinical Summary</h2>
+    <div class="box">{{llm_overview}}</div>
+</div>
+
+<!-- ===========================
+     BEHAVIORAL PATTERNS
+=========================== -->
+<div class="section">
+    <h2>Behavioral Patterns</h2>
+    <div class="box">{{llm_patterns}}</div>
+</div>
+
+<!-- ===========================
+     TIMELINE SUMMARY
+=========================== -->
+<div class="section">
+    <h2>Timeline Summary</h2>
+    <div class="box">{{llm_timeline}}</div>
+</div>
+
+<!-- ===========================
+     EMOTIONAL & PSYCHOLOGICAL
+=========================== -->
+<div class="section">
+    <h2>Emotional Indicators & Psychological Context</h2>
+    <div class="box">{{llm_emotion}}</div>
+</div>
+
+<!-- ===========================
+     RISK ASSESSMENT
+=========================== -->
+<div class="section">
+    <h2>Risk Assessment</h2>
+    <div class="box">{{llm_risk}}</div>
+</div>
+
+<!-- ===========================
+     LEGAL CONSIDERATIONS
+=========================== -->
+<div class="section">
+    <h2>Legal Considerations</h2>
+    <div class="box">{{llm_legal}}</div>
+</div>
+
+<!-- ===========================
+     RAW STRUCTURED TABLE
+=========================== -->
+<div class="section">
+    <h2>Structured Case Indicators</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>Extracted Data</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Physical Abuse</td>
+                <td>{{physical_abuse}}</td>
+            </tr>
+            <tr>
+                <td>Verbal Abuse</td>
+                <td>{{verbal_abuse}}</td>
+            </tr>
+            <tr>
+                <td>Threats</td>
+                <td>{{threat}}</td>
+            </tr>
+            <tr>
+                <td>Control</td>
+                <td>{{control}}</td>
+            </tr>
+            <tr>
+                <td>Fear</td>
+                <td>{{fear}}</td>
+            </tr>
+            <tr>
+                <td>Risk Signals</td>
+                <td>{{risk}}</td>
+            </tr>
+            <tr>
+                <td>Patterns</td>
+                <td>{{patterns}}</td>
+            </tr>
+            <tr>
+                <td>Timeline (Raw)</td>
+                <td>{{timeline}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- ===========================
+     FOOTER
+=========================== -->
+<div class="footer">
+    SAFEASSIST – Confidential Clinical Report • For authorized personnel only • Page numbers handled by PDF engine
+</div>
+
+</body>
+</html>

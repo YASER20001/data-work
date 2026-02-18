@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "safeassist-dev",
+  "private_key_id": "a46b8301ad5ececec233a4c906fe99003a355e93",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCY7uS4YARADFPX\nl7OBpQBH3O22O6b2SGLGaPpv0wVtI2+3SEgCfCv9qAhyY9fLpBvMteLQD+UfwEgI\ny0tnKAm//7UxlJieUZiKsLXX+smv0yx78vqqxdjL2cjam2r/xSftTfiv7L9Ci3nX\ng7tnA1Hzd+BmbWrWte/qitVO3SYMj7gFA5KiNlGOgoRhGse5i/Oo1EvQN/PfORdL\njUyo2Jaso/S9TMxZAGfMjbDGvHmLpMste9niGSclehBWOScc+AKhm962V/UWRf61\nMZM2McUeZZPXDRXs9aQnM6HGg9ECWMqprkpJVIHJsczhEZI8H5IVdVbu/FiP52Wd\nWc4beNxvAgMBAAECggEASWQXgf2d/IiN8b/cxqIC1PnKX/IXiUgqkrHNQT3A9GOV\nmJzI5dxmFgf96btNU24xYxeEPbnrCEYzq3i3+kymBSw27ZC0fwGEVUZBNeElyclr\nJx5vOeXRSN5+O55rBkw8gW6yIebY0Bv0AD84/1ICEXddSnpG07wi4uj2Pa72M/9E\nNI9sQFUCzLQi5U/xv4k9Ac0U71N8WfFaVGNw0AqhHayxCw+OxPIAWy9rxouxVXze\nrhCQmqeAymJlepb5WgJLWlPYEEQgxFaJ6XvFHneFo4iRQqmzJtHlNI4n/dLCgxVc\ngqdYB9fzjFCTODXfDAPMjThUVqIC/L28QdofF1rqdQKBgQDQSlictSek5Ho0pXuU\nCTd3EoSpFD/NWKNIEfAdc+iJANZ285SmPXkJ2LDeSu64srtLTnRtT9S2JN2fA3Di\nes/1EnBLBhf54NFSs8NhV1wO10gy54QyAYwMo9wuPTD18LCjJrngwL5fCC27ORl7\ncId6GgZBsdmlx/W/CHKWap77JQKBgQC79offIe9rtQBXgLMIst+yYv0zxxSt0D2I\nCWRLO3ATEs0IpHA3CL+ETCw+B9lL5tVifstlXanGIAAo/DyMoT9oOBXR9wo891zx\nQjSOZLJDL1tuCfHOLZalMkhkcP3oBD1NgPpbWj8zJKhIVS7KUadFDlbqXe6R/OZG\nf8DC+pXPAwKBgQCjX20ZnU23HC5uVM4VUxVaJABBzkws+LU5tjgsIdnme+2751pU\n+iqR+pDgCs4ruKUHcEYJ52/kXg4mx0AnpESw6QGDFwh/SkNlJvK8yxS930YWB1m9\nD1GWKIBvFDfu8BbcIWfyTbwENhoIm8TM+XqJ3xfBN4qLacfrSuj16jNAsQKBgDso\nAec19PY/BxaDCNXKBiFMikgLdfSmP1dbLVeII2O9XQ5FQpPviucGWj5Dlh4PTkUr\nhrQmYFJcq/A6Qow4C46vaB6m03AQog3EOmo+QuRmOS5Oru2m52yigKor7Z1iCDEm\nUKUDqDReayAovwsp260eMDiey4DiyU6S0oYK+68lAoGADP+qcTJKnH7F8Hr82s5o\n05IirD48qMwO0+GY2Zt6Kw37/Rn5+mY045YBcDHgS+//BOEz4+YzbBU86m2XaFt8\nlBbgq5Pler3vgmjsXA2JBpntSpPDUYffpV6FOpyjXLLcfwfdutmHY6u+6wJqRP97\nOhPthGNDqXduLXLprzCiaZk=\n-----END PRIVATE KEY-----\n",
+  "client_email": "safeassist-stt@safeassist-dev.iam.gserviceaccount.com",
+  "client_id": "104441454412265364364",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/safeassist-stt%40safeassist-dev.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
