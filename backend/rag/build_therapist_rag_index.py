@@ -101,10 +101,14 @@ def main() -> None:
     model = SentenceTransformer(model_name)
     emb = model.encode(docs, show_progress_bar=True)
     emb = np.array(emb, dtype="float32")
+
+    # L2-normalize so IndexFlatIP gives cosine similarity
+    faiss.normalize_L2(emb)
+
     dim = emb.shape[1]
 
     # FAISS index with explicit IDs so metadata order stays stable
-    index = faiss.IndexIDMap(faiss.IndexFlatL2(dim))
+    index = faiss.IndexIDMap(faiss.IndexFlatIP(dim))
     ids = np.arange(len(docs), dtype="int64")
     index.add_with_ids(emb, ids)
 

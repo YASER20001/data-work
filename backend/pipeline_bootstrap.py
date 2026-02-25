@@ -105,9 +105,14 @@ translation_final = TranslationAdapter(llm)
 # --- 7. PERSONALITY ---
 from backend.agents.agent_personality import run as personality_run
 class PersonalityAdapter:
+    def __init__(self, rag_pipeline: RagPipeline):
+        self.rag_pipeline = rag_pipeline
     def run(self, state: AppState):
+        # Ensure RAG is available before personality agent runs (it runs before therapist)
+        if getattr(state, "rag_pipeline", None) is None:
+            state.rag_pipeline = self.rag_pipeline
         return personality_run(state)
-personality = PersonalityAdapter()
+personality = PersonalityAdapter(rag_pipeline_instance)
 
 # --- 8. STT ---
 from backend.agents.agent_stt import run as stt_run
@@ -144,6 +149,13 @@ def _fingerprint(txt: str) -> str:
 def router_node(state: AppState):
     """Classifies user intent and prepares state for specialized agents."""
     push_debug(state, "info", "[Router] Determining intent…")
+
+    # Inject RAG pipeline early so all downstream agents have access,
+    # and clear the per-turn embedding cache for a fresh turn.
+    if getattr(state, "rag_pipeline", None) is None:
+        state.rag_pipeline = rag_pipeline_instance
+    if hasattr(rag_pipeline_instance, "clear_turn_cache"):
+        rag_pipeline_instance.clear_turn_cache()
 
     txt = last_user_text(state.messages)
     lang = guess_language_from_messages(state.messages, default="auto")

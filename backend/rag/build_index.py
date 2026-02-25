@@ -87,13 +87,15 @@ def main():
     # --- 4. Build and Save FAISS Index ---
     print("Building FAISS index...")
     try:
-        index = faiss.IndexFlatL2(dimension)
-        # We use IndexIDMap to map the vector's position (0, 1, 2...) to its ID
-        index = faiss.IndexIDMap(index) 
-        
+        # L2-normalize embeddings so that IndexFlatIP gives cosine similarity
+        embeddings = np.array(embeddings, dtype='float32')
+        faiss.normalize_L2(embeddings)
+
+        index = faiss.IndexIDMap(faiss.IndexFlatIP(dimension))
+
         # Create an array of sequential IDs
         ids = np.array(range(len(all_chunks))).astype('int64')
-        
+
         # Add vectors and their IDs to the index
         index.add_with_ids(embeddings, ids)
         
