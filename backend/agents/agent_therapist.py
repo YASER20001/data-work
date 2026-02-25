@@ -88,25 +88,86 @@ def _merge_case_notes(old_any: Any, patch_any: Any) -> CaseNotes:
 # PART 2: RAG UTILITIES
 # =============================================================================
 
-def _get_therapist_rag_snippets(rag_pipeline, user_text: str, k: int = 5) -> str:
-    """Fetches relevant clinical knowledge snippets from the vector database."""
+# Source-file key → readable LLM tag  (K: better source tagging)
+_SOURCE_TAG_MAP = {
+    "CCSA-Motivational-Interviewing": "[MI Technique]",
+    "understanding_mi":               "[MI Technique]",
+    "Trauma-Informed":                "[Trauma Care]",
+    "SAMHSA":                         "[Trauma Care]",
+    "WHO":                            "[WHO Guideline]",
+    "HEC":                            "[Clinical Guide]",
+    "Bookshelf":                      "[Clinical Evidence]",
+    "counsel_chat":                   "[Therapist Example]",
+    "arabic_empathetic":              "[Arabic Example]",
+    "synthetic_v1":                   "[Synthetic]",
+}
+
+
+def _tag_for(meta: dict) -> str:
+    """Map raw metadata to a human-readable semantic label."""
+    src = meta.get("source_file") or meta.get("source") or meta.get("tag") or "example"
+    for key, tag in _SOURCE_TAG_MAP.items():
+        if key.lower() in str(src).lower():
+            return tag
+    if meta.get("topic") == "mi":
+        return "[MI Technique]"
+    return f"[{str(src)[:20]}]"
+
+
+def _get_therapist_rag_snippets(
+    rag_pipeline,
+    user_text: str,
+    history_context: str = "",
+    risk_score: float = 0.0,
+) -> str:
+    """
+    Fetch relevant clinical knowledge snippets from the vector database.
+
+    Optimizations applied:
+      (C) Context-enriched query — combines user text + recent history.
+      (M) Dynamic k             — retrieval depth scales with message length / risk.
+      (L) search_combined       — fans out to therapy + therapist indexes in parallel.
+      (J) Deduplication         — removes near-duplicate snippets; budgets total chars.
+      (K) Source tagging        — human-readable semantic labels in the prompt.
+    """
     if not rag_pipeline:
         return "(Therapist RAG offline.)"
-
     if not isinstance(user_text, str) or not user_text.strip():
         return "(No user text for RAG.)"
 
+    # (C) Build context-enriched query
+    enriched_query = user_text
+    if history_context and history_context.strip():
+        enriched_query = f"{user_text}\n{history_context}"
+
+    # (M) Dynamic k based on complexity and risk
+    k = rag_pipeline.dynamic_k(enriched_query, risk_score)
+
     try:
-        results = rag_pipeline.search_therapist(user_text, k=k)
-        snippets: List[str] = []
+        # (L) Parallel search across therapy-style + therapist-knowledge indexes
+        results = rag_pipeline.search_combined(
+            enriched_query,
+            indexes=["therapy", "therapist"],
+            k_per_index=k,
+        )
+
+        raw_snippets: List[str] = []
         for meta in results:
             if not meta or meta.get("source") == "error":
                 continue
             txt = (meta.get("text") or "").replace("\n", " ").strip()
-            tag = meta.get("tag") or meta.get("source") or "example"
-            if txt:
-                snippets.append(f"- [{tag}] {txt[:350]}")
-        return "\n".join(snippets) if snippets else "(No therapist RAG matches found.)"
+            if not txt:
+                continue
+            tag = _tag_for(meta)          # (K) semantic label
+            raw_snippets.append(f"- {tag} {txt[:300]}")
+
+        if not raw_snippets:
+            return "(No therapist RAG matches found.)"
+
+        # (J) Deduplicate and enforce 2 000-char total budget
+        final_snippets = rag_pipeline.deduplicate_snippets(raw_snippets, max_chars=2000)
+        return "\n".join(final_snippets)
+
     except Exception as e:
         print(f"[Therapist RAG] query failed: {e}")
         return "(Therapist RAG error.)"
@@ -288,9 +349,15 @@ def run(state: AppState) -> Dict[str, Any]:
 
     time_since_last = _time_since_last_chat(state)
 
-    # RAG Search
+    # RAG Search — pass recent history and risk score for enriched retrieval
     rag_service = getattr(state, "rag_pipeline", None)
-    therapist_rag_snippets = _get_therapist_rag_snippets(rag_service, user, k=5)
+    history_context = history_window(messages, n=2)   # last 2 messages for context enrichment
+    therapist_rag_snippets = _get_therapist_rag_snippets(
+        rag_service,
+        user,
+        history_context=history_context,
+        risk_score=risk_score,
+    )
 
     print("[Therapist] RAG snippets preview:", therapist_rag_snippets[:200])
 

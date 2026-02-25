@@ -121,14 +121,33 @@ def _validate_json(obj: Dict[str, Any]) -> Dict[str, Any]:
     return {"detected_personality": label, "confidence": conf, "recommended_strategy": strat}
 
 
-def _get_rag_criteria(rag_pipeline: Any, user_text: str, k: int = 5) -> str:
-    """Retrieves clinical criteria from the vector database for grounded analysis."""
-    if not rag_pipeline or not user_text.strip(): return "(No RAG context.)"
+def _get_rag_criteria(
+    rag_pipeline: Any,
+    user_text: str,
+    history_context: str = "",
+    k: int = 5,
+) -> str:
+    """
+    Retrieve clinical personality criteria from the vector database.
+
+    (C) Uses a context-enriched query (user text + recent history) so that
+        criteria matching benefits from conversational context, not just the
+        latest single message.
+    """
+    if not rag_pipeline or not user_text.strip():
+        return "(No RAG context.)"
+
+    # (C) Enrich the query with recent conversation context
+    enriched_query = user_text
+    if history_context and history_context.strip():
+        enriched_query = f"{user_text}\n{history_context}"
+
     try:
-        results = rag_pipeline.search_personality(user_text, k=k)
+        results = rag_pipeline.search_personality(enriched_query, k=k)
         formatted = []
         for meta in results:
-            if not meta or meta.get("source") == "error": continue
+            if not meta or meta.get("source") == "error":
+                continue
             formatted.append(
                 f"- ID: {meta.get('id')}\n"
                 f"  Def: {meta.get('definition')}\n"
@@ -149,10 +168,12 @@ def run(state: AppState) -> Dict[str, Any]:
     """
     payload = _mk_payload(state)
     user_text = payload.get("user_input", "")
+    messages  = list(getattr(state, "messages", []) or [])
 
-    # 1. RAG Retrieval
+    # 1. RAG Retrieval — enriched with recent conversation context (C)
     rag_service = getattr(state, "rag_pipeline", None)
-    rag_criteria = _get_rag_criteria(rag_service, user_text)
+    history_context = history_window(messages, n=2, style="role")
+    rag_criteria = _get_rag_criteria(rag_service, user_text, history_context=history_context)
 
     # 2. LLM Inference
     prompt = _TEMPLATE.format(

@@ -39,9 +39,12 @@ def main():
     embeddings = model.encode(texts, show_progress_bar=True)
 
     # 4. بناء وحفظ ملف FAISS الجديد
+    embeddings = np.array(embeddings, dtype='float32')
+    # L2-normalize so IndexFlatIP gives cosine similarity
+    faiss.normalize_L2(embeddings)
+
     dimension = embeddings.shape[1]
-    index = faiss.IndexFlatL2(dimension)
-    index = faiss.IndexIDMap(index)
+    index = faiss.IndexIDMap(faiss.IndexFlatIP(dimension))
 
     # نربط الأرقام الجديدة (من 0 إلى عدد المواد الجديد)
     ids = np.array(range(len(texts))).astype('int64')
