@@ -1,78 +1,75 @@
-# MiFoodStudio — Thanksgiving 2026 campaign copy
+# MiFoodStudio — Thanksgiving 2026 campaign
 
-Canadian Thanksgiving: **Monday, October 12, 2026**. Post the Reel first (Oct 6–7), Post 1 two days later, Post 2 as the last-call push (Oct 9–10).
-
----
-
-## Reel — `reel_mifoodstudio_thanksgiving_9x16.mp4` (33 s, 1080×1920)
-
-**On-screen script**
-
-| Time | Shot (real kitchen) | Text |
-|---|---|---|
-| 0:00 | Burners close-up, push in | THANKSGIVING FOR 20? |
-| 0:02.5 | — | YOUR HOME OVEN CAN'T. |
-| 0:05 | Full cook line | THIS ONE CAN. |
-| 0:07.5 | Burner line + stock pot | 01/05 · 6 OPEN BURNERS |
-| 0:10 | Combi oven | 02/05 · COMMERCIAL COMBI OVEN |
-| 0:12.5 | Walk-in cooler (produce) | 03/05 · WALK-IN COOLER |
-| 0:15 | Main prep area | 04/05 · PREP TABLES FOR THE WHOLE FAMILY |
-| 0:17.5 | 3-bay sink | 05/05 · NO MESS AT HOME. |
-| 0:20 | Cook line, slow drift | COOK HERE. CELEBRATE AT HOME. · Rental kitchen · Meadowvale, Mississauga |
-| 0:25 | Cook line, darkened | THANKSGIVING SLOTS ARE LIMITED · Book now · (289) 270-0990 |
-| 0:28 | Brand end card | Logo · BOOK YOUR THANKSGIVING SLOT · (289) 270-0990 · mifoodstudio.com · Unit 1, 6905 Millcreek Dr |
-
-**Caption**
-
-> Thanksgiving for 20 people. One home oven. You already know how that ends. 🦃
->
-> Skip it this year. Cook the whole feast in our commercial kitchen in Meadowvale, Mississauga — 6 open burners, a commercial combi oven, a walk-in cooler and prep tables with room for the whole family. Then take it all home and actually enjoy the day.
->
-> 📞 (289) 270-0990 · 🌐 mifoodstudio.com · 📍 Unit 1, 6905 Millcreek Drive
-> Thanksgiving slots are limited — book now.
->
-> #MiFoodStudio #Thanksgiving #CanadianThanksgiving #Mississauga #MississaugaFood #CommercialKitchen #RentalKitchen #Meadowvale #GTAFood #ThanksgivingDinner #HomeCook #PeelRegion #MississaugaBusiness #CloudKitchen
-
-**Cover frame:** use the 0:01 frame (burners + "THANKSGIVING FOR 20?") — `reel_cover.jpg` is included.
+Canadian Thanksgiving is **Monday, October 12, 2026**. Suggested run: spot goes up Oct 6–7, Poster 1 on Oct 8, Poster 2 as the last-call push Oct 9–10.
 
 ---
 
-## Post 1 — `insta_post_1_hero.jpg` (1080×1350)
+## The spot — `mifoodstudio_thanksgiving_tv_30s.mp4` (30 s, 1920×1080)
 
-> Cook your Thanksgiving feast in a professional kitchen. 🍁
+A three-act TV-style commercial. Cinematic letterbox, film grain, original music and sound design.
+
+| Time | Act | Picture | Sound | Super |
+|---|---|---|---|---|
+| 0:00 | **The problem** | Home kitchen, raw turkey, flour everywhere (cold grade) | No music. Clock ticking, oven timer beeping faster, pots clattering, low drone rising | *Thanksgiving. Twenty guests.* |
+| 0:03.6 | | The family, heads in hands | | *One oven.* |
+| 0:06 | | Hard cut to black. Silence. | Sub thump, then nothing | *There's a bigger kitchen in Mississauga.* |
+| 0:07 | **The reveal** | Your real cook line, wide and warm, slow drift — no words for 1.6 s | Music drops on the cut | *MiFoodStudio · Cloud & Rental Kitchen · Mississauga* |
+| 0:10.5 | | Burners · combi oven · walk-in cooler (1.5 s each, no labels) | | |
+| 0:15 | | Couple prepping in the kitchen | | *Cook your whole feast here.* |
+| 0:17.5 | | Main prep room | | *Room for everyone.* |
+| 0:20 | **The payoff** | The family table, slow motion, candlelight, the turkey | Music swells | *Then celebrate at home.* → *No mess. No stress.* |
+| 0:24.6 | **The ask** | Logo · Book your Thanksgiving slot · (289) 270-0990 · mifoodstudio.com · address | Chime, music resolves | |
+
+**Where to run it:** YouTube pre-roll, Facebook/Instagram feed (16:9 is fine in feed), TV/digital signage, your website header, WhatsApp.
+If you also want a vertical cut for Reels/Stories, say so — the source project can re-frame it.
+
+**Caption (Facebook / Instagram / YouTube)**
+
+> Thanksgiving. Twenty guests. One oven.
+> There's a bigger kitchen in Mississauga. 🍁
 >
-> Our commercial kitchen in Mississauga is open for family bookings this Thanksgiving. Bring the recipes and the people; we bring six burners, a commercial combi oven, a walk-in cooler and enough stainless-steel counter for everyone to have a station.
->
-> Bright space. Big flavour. No cleanup at home.
+> Cook your whole feast at MiFoodStudio — a professional kitchen with room for everyone — then take it home and actually enjoy the day. No mess. No stress.
 >
 > 📞 (289) 270-0990 · 🌐 mifoodstudio.com
-> 📍 Unit 1, 6905 Millcreek Drive, Mississauga, ON (Meadowvale Business Park)
+> 📍 Unit 1, 6905 Millcreek Drive, Mississauga (Meadowvale)
+> Thanksgiving slots are limited.
 >
-> #MiFoodStudio #Thanksgiving2026 #CanadianThanksgiving #Mississauga #RentalKitchen #CommercialKitchen #Meadowvale #MississaugaEats #ThanksgivingPrep #FamilyDinner
+> #MiFoodStudio #Thanksgiving #CanadianThanksgiving #Mississauga #Meadowvale #CommercialKitchen #RentalKitchen #MississaugaFood #ThanksgivingDinner #GTA
 
 ---
 
-## Post 2 — `insta_post_2_features.jpg` (1080×1350)
+## Poster 1 — `poster_1_promise.jpg` (1080×1350)
 
-> Everything your home kitchen isn't. 🔥
+**Big family. Small kitchen. We fixed that.**
+
+> Big family. Small kitchen. We fixed that. 🍁
 >
-> 01 — Six open burners
-> 02 — Commercial combi oven
-> 03 — Walk-in cooler
-> 04 — Prep tables for the whole family
+> This Thanksgiving, cook your whole feast in our professional kitchen in Mississauga — then take it home and enjoy the day with the people you made it for.
 >
-> One stove and a crowded counter won't feed 20. Cook the whole feast at MiFoodStudio, then celebrate at home — no mess, no stress.
+> 📞 (289) 270-0990 · 🌐 mifoodstudio.com · 📍 Unit 1, 6905 Millcreek Drive
 >
-> Thanksgiving is Monday, October 12 and slots are limited. Call (289) 270-0990 or visit mifoodstudio.com to book.
->
-> The MiFoodStudio team wishes you a very Happy Thanksgiving!
->
-> #MiFoodStudio #Thanksgiving #Mississauga #CommercialKitchen #RentalKitchen #Meadowvale #GTA #MississaugaSmallBusiness #ThanksgivingDinner #CookTogether
+> #MiFoodStudio #Thanksgiving2026 #CanadianThanksgiving #Mississauga #RentalKitchen #CommercialKitchen #Meadowvale #FamilyDinner
 
 ---
 
-## Stories (optional, free to post daily)
+## Poster 2 — `poster_2_home_vs_here.jpg` (1080×1350)
 
-- Repost the Reel to Stories with a "Book now" link sticker → mifoodstudio.com
-- Countdown sticker: "Thanksgiving slots close in…"
-- Poll: "Cooking for how many this year? 6–10 / 10–20 / 20+"
+**Same turkey. Different day.** / **Change the kitchen, not the recipe.**
+
+> Same turkey. Different day.
+>
+> Keep Grandma's recipe. Just change where you make it. At MiFoodStudio you get a full professional kitchen, counter space for every dish, and a clean house when you get home.
+>
+> Thanksgiving is Monday, October 12 and slots are limited — call (289) 270-0990 or book at mifoodstudio.com.
+>
+> Happy Thanksgiving from the MiFoodStudio team!
+>
+> #MiFoodStudio #Thanksgiving #Mississauga #CommercialKitchen #RentalKitchen #Meadowvale #GTA #ThanksgivingDinner #CookTogether
+
+---
+
+## Notes
+
+- Every kitchen shot in the spot and posters is your real kitchen. The two "people" moments (chaotic home kitchen, family at the table) come from your existing clip, re-cropped so none of the old burned-in text shows; the couple-cooking still is from your existing flyer artwork.
+- Music and sound design are generated from scratch — nothing to license.
+- Everything is rebuilt from `src/` scripts; a copy change is a quick re-render.

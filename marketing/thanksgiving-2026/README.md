@@ -2,11 +2,11 @@
 
 | File | Use |
 |---|---|
-| `reel_mifoodstudio_thanksgiving_9x16.mp4` | 33 s Reel / Story / TikTok, 1080×1920, original music |
-| `reel_cover.jpg` | Reel cover frame |
-| `insta_post_1_hero.jpg` | Feed post 1 (1080×1350) — the offer |
-| `insta_post_2_features.jpg` | Feed post 2 (1080×1350) — what you get |
-| `captions.md` | Captions, hashtags, posting order, Reel script |
-| `src/` | Scripts that generated everything (`render.py`, `music.py`, `posts.py`) — rerun to change copy or shots |
+| `mifoodstudio_thanksgiving_tv_30s.mp4` | 30 s commercial, 1920×1080 — YouTube, Facebook/Instagram feed, TV/signage, website |
+| `tv_cover.jpg` | Thumbnail / cover frame |
+| `poster_1_promise.jpg` | Instagram poster 1 (1080×1350) — "Big family. Small kitchen. We fixed that." |
+| `poster_2_home_vs_here.jpg` | Instagram poster 2 (1080×1350) — "Same turkey. Different day." |
+| `captions.md` | Script, captions, hashtags, posting order |
+| `src/` | Everything is generated from these scripts (`render_tv.py`, `music.py`, `posters_v2.py`) — edit copy or shots and re-render |
 
-All photos are the real kitchen; no AI imagery. Music and SFX are generated in `music.py` (no licensing needed).
+Every kitchen shot is the real kitchen. Music and sound design are generated in `music.py` / `render_tv.py` — nothing to license.
