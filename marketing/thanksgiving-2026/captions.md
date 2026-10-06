@@ -10,15 +10,15 @@ A three-act TV-style commercial. Cinematic letterbox, film grain, original music
 
 | Time | Act | Picture | Sound | Super |
 |---|---|---|---|---|
-| 0:00 | **The problem** | Home kitchen, raw turkey, flour everywhere (cold grade) | No music. Clock ticking, oven timer beeping faster, pots clattering, low drone rising | *Thanksgiving. Twenty guests.* |
-| 0:03.6 | | The family, heads in hands | | *One oven.* |
-| 0:06 | | Hard cut to black. Silence. | Sub thump, then nothing | *There's a bigger kitchen in Mississauga.* |
-| 0:07 | **The reveal** | Your real cook line, wide and warm, slow drift — no words for 1.6 s | Music drops on the cut | *MiFoodStudio · Cloud & Rental Kitchen · Mississauga* |
-| 0:10.5 | | Burners · combi oven · walk-in cooler (1.5 s each, no labels) | | |
+| 0:00 | **The problem** | Home kitchen, raw turkey, flour everywhere (cold grade, real motion) | No music. Clock ticking, oven timer beeping faster, pots clattering, low drone rising | *Thanksgiving. Twenty guests.* |
+| 0:02.6 | | The family, heads in hands — fast push-in, handheld | | *One oven.* |
+| 0:04.8 | | Hard cut to black. Silence. | Sub thump, then nothing | *There's a bigger kitchen in Mississauga.* |
+| 0:06.2 | **The reveal** | Your real cook line, wide and warm, slow push, light sweep — no words for 2 s | Music drops on the cut | *MiFoodStudio · Cloud & Rental Kitchen · Mississauga* |
+| 0:10 | | Burners (steam rising) → cook line → combi oven → produce. Zoom-through transitions on the beat, no labels | Sizzle under the music | |
 | 0:15 | | Couple prepping in the kitchen | | *Cook your whole feast here.* |
-| 0:17.5 | | Main prep room | | *Room for everyone.* |
-| 0:20 | **The payoff** | The family table, slow motion, candlelight, the turkey | Music swells | *Then celebrate at home.* → *No mess. No stress.* |
-| 0:24.6 | **The ask** | Logo · Book your Thanksgiving slot · (289) 270-0990 · mifoodstudio.com · address | Chime, music resolves | |
+| 0:17.5 | | The line, straight on, lateral drift | | *Room for everyone.* |
+| 0:20 | **The payoff** | The roast turkey, steam rising, candle flicker, slow push | Music swells | *Then celebrate at home.* → *No mess. No stress.* |
+| 0:25 | **The ask** | Logo with light sweep · Book your Thanksgiving slot · (289) 270-0990 · mifoodstudio.com · address | Chime, music resolves | |
 
 **Where to run it:** YouTube pre-roll, Facebook/Instagram feed (16:9 is fine in feed), TV/digital signage, your website header, WhatsApp.
 If you also want a vertical cut for Reels/Stories, say so — the source project can re-frame it.
@@ -70,6 +70,6 @@ If you also want a vertical cut for Reels/Stories, say so — the source project
 
 ## Notes
 
-- Every kitchen shot in the spot and posters is your real kitchen. The two "people" moments (chaotic home kitchen, family at the table) come from your existing clip, re-cropped so none of the old burned-in text shows; the couple-cooking still is from your existing flyer artwork.
+- Every kitchen shot in the spot and posters is your real kitchen. The chaotic home kitchen is from your existing clip, re-cropped so none of the old burned-in text shows; the couple-cooking and roast-turkey images are from your existing flyer artwork. No alcohol appears anywhere in the campaign.
 - Music and sound design are generated from scratch — nothing to license.
 - Everything is rebuilt from `src/` scripts; a copy change is a quick re-render.
